@@ -87,16 +87,18 @@ open class PasswordContainerView: UIView {
             self.widthConstraint.constant = width
         }
     }
-    fileprivate let kDefaultWidth: CGFloat = 288
-    fileprivate let kDefaultHeight: CGFloat = 410
+    fileprivate let kDefaultWidth: CGFloat = 240
+    fileprivate let kDefaultRatio: CGFloat = 410 / 288
     fileprivate var widthConstraint: NSLayoutConstraint!
     
     fileprivate func configureConstraints() {
-        let ratioConstraint = widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: kDefaultWidth / kDefaultHeight)
+        let ratioConstraint = heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: kDefaultRatio)
+        
         self.widthConstraint = widthAnchor.constraint(equalToConstant: kDefaultWidth)
-        self.widthConstraint.priority = 999
+        self.widthConstraint.priority = UILayoutPriorityRequired
         NSLayoutConstraint.activate([ratioConstraint, widthConstraint])
     }
+
     
     //MARK: VisualEffect
     open func rearrangeForVisualEffectView(in vc: UIViewController) {
